@@ -14,4 +14,9 @@ cmake ../project/
 cmake --build.
 ```
 
+## TODO:
+- Implement separate builds for library and example application.
+- Handle variadic arguments passed to ncurses.
+- Safely handle errors/outputs of methods from ncurses.
+
 
