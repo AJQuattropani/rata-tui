@@ -1,27 +1,35 @@
-#include "tiles.hpp"
+#include "./tiles.hpp"
+#include <string>
+#include <utility>
 
-using namespace rata;
+using rata::Tile;
 
 Tile::Tile() {
-  tile_ptr = newwin(10, 30, 5 ,5); // dims, pos
+  tile_ptr = newwin(10, 30, 5, 5);
+  // dims, pos
 }
 
 Tile::~Tile() {
   delwin(tile_ptr);
 }
 
-Tile::Tile(const Tile&) {
-
+Tile::Tile(const Tile& tile) {
+  tile_ptr = newwin(10, 30, 5, 5);
 }
 
-Tile::Tile(Tile&&) {
-
+auto Tile::print(const std::string &msg) -> void {
+  wprintw(tile_ptr, "%s", msg.c_str());
 }
 
-auto Tile::operator=(const Tile&) -> Tile& {
-  this->tile_ptr = newwin(10, 30, 5, 5);
-
-  return *this;
+auto Tile::getWinPosition() -> std::pair<int, int> {
+  return std::pair(getbegx(tile_ptr), getbegy(tile_ptr));
 }
 
-auto Tile::operator=(Tile&&) -> Tile& = default;
+auto Tile::getCursorPosition() -> std::pair<int, int> {
+  return std::pair(getcurx(tile_ptr), getcury(tile_ptr));
+}
+
+auto Tile::getWinSize() -> std::pair<int, int> {
+  return std::pair(getmaxx(tile_ptr), getmaxy(tile_ptr));
+}
+
