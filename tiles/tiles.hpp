@@ -16,7 +16,9 @@ class Tile {
   auto operator=(const Tile &) -> Tile & = delete;
   auto operator=(Tile &&) -> Tile & = delete;
 
-  auto print(const std::string &msg) -> void;
+  auto write(const std::string &msg) -> void;
+  auto setCursorPosition(int x, int y) -> void;
+  auto writeAt(int x, int y, const std::string &msg) -> void;
 
   auto getWinPosition() -> std::pair<int, int>;
   auto getWinSize() -> std::pair<int, int>;

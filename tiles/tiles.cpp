@@ -1,6 +1,4 @@
 #include "./tiles.hpp"
-#include <string>
-#include <utility>
 
 using rata::Tile;
 
@@ -17,8 +15,16 @@ Tile::Tile(const Tile& tile) {
   tile_ptr = newwin(10, 30, 5, 5);
 }
 
-auto Tile::print(const std::string &msg) -> void {
+auto Tile::write(const std::string &msg) -> void {
   wprintw(tile_ptr, "%s", msg.c_str());
+}
+
+auto Tile::writeAt(int x, int y, const std::string &msg) -> void {
+  mvwprintw(tile_ptr, y, x, "%s", msg.c_str());
+}
+
+auto Tile::setCursorPosition(int x, int y) -> void {
+  wmove(tile_ptr, y, x);
 }
 
 auto Tile::getWinPosition() -> std::pair<int, int> {
@@ -32,4 +38,5 @@ auto Tile::getCursorPosition() -> std::pair<int, int> {
 auto Tile::getWinSize() -> std::pair<int, int> {
   return std::pair(getmaxx(tile_ptr), getmaxy(tile_ptr));
 }
+
 
